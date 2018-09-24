@@ -85,7 +85,6 @@ def login(request):
                 # 校验用户名和密码都成功
                 # 1. 设置cookie中的随机参数ticket --> auth.login()
                 res = HttpResponseRedirect(reverse('boke:index'))
-                res2 = HttpResponseRedirect()
                 # set_cookie(key, value, max_age='', expires='')
                 ticket = get_ticket()
                 res.set_cookie('ticket', ticket, max_age=100000)
@@ -139,7 +138,7 @@ def setting(request):
         return render(request, 'setting.html')
 
 
-@is_login
+# @is_login
 def update_article(request, e_id):
     if request.method == 'GET':
         parts = Part.objects.all()
@@ -166,13 +165,13 @@ def update_flink(request):
 
 
 
-class E_del(mixins.ListModelMixin,
-            mixins.DestroyModelMixin,
-            viewsets.GenericViewSet):
+    class E_del(mixins.ListModelMixin,
+                mixins.DestroyModelMixin,
+                viewsets.GenericViewSet):
 
-    queryset = Essay.objects.all()
-    serializer_class = EssaySerializer
+        queryset = Essay.objects.all()
+        serializer_class = EssaySerializer
 
-    def perform_destroy(self, instance):
-        instance.is_delete = 1
-        instance.save()
+        def perform_destroy(self, instance):
+            instance.is_delete = 1
+            instance.save()

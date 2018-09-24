@@ -11,10 +11,10 @@ from boker import views
 
 
 
-# 引入路由
-router = SimpleRouter()
-# 使用router注册的地址
-router.register(r'^essay_del', views.E_del)
+# # 引入路由
+# router = SimpleRouter()
+# # 使用router注册的地址
+# router.register(r'^essay_del', views.E_del)
 
 
 
